@@ -19,7 +19,7 @@ A call to the API should look like: http://127.0.0.1:5000/api/65f4f0c5-ef9e-490c
 
 There are some tests for the api. These are  implemented using 'unittest'.
 To run the tests use: ```python -m unittest tests/test_api.py```
-There are some warnings when running the tests realted to the async get_album_covers function. However, the tests are all passed.
+There are some warnings when running the tests realted to the async get_album_covers function. However, all tests are passedd.
 
 ## Caching
 Caching was implemented and functional. However when async was implemented the implementation broke, therefore it is removed for now.
