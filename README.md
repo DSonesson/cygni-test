@@ -22,8 +22,8 @@ To run the tests use: ```python -m unittest tests/test_api.py```
 There are some warnings when running the tests realted to the async get_album_covers function. However, all tests are passedd.
 
 ## Caching
-Caching was implemented and functional. However when async was implemented the implementation broke, therefore it is removed for now.
-TODO: Implement cache that works with async functions.
+Caching was implemented and functional using Flask_Caching. However, this implementation did not work when async was implemented.
+Instead, aiocache is used for caching as this works fine even with async functions.
 
 ## Övrigt - now in swedish
 Detta API är en uppdaterad version av ett tidigare test gjort, då implementerat i Django.
