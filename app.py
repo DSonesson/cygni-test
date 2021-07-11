@@ -1,21 +1,15 @@
 from werkzeug.utils import import_string
 from flask import Flask, abort, jsonify
-from flask_caching import Cache
 
 from aiohttp import ClientSession
 import requests
 import asyncio
 import json
 
-config = {
-    "DEBUG": True,
-    "CACHE_TYPE": 'FileSystemCache', 
-    'CACHE_DIR': '/tmp',
-    "CACHE_DEFAULT_TIMEOUT": 300,
-}
+from aiocache import cached, Cache
+from aiocache.serializers import PickleSerializer
+
 app = Flask(__name__)
-app.config.from_mapping(config)
-cache = Cache(app)
 
 # Error handlers 
 
@@ -29,10 +23,8 @@ def resource_not_found(e):
        
 # Routes 
 
-# Cache stopped working when async was introduced. TODO make cache work with async.
-#@cache.cached(timeout=300)
-
-@app.route('/api/<mbid>' )
+@app.route('/api/<mbid>')
+@cached(ttl=300, cache=Cache.MEMORY, serializer=PickleSerializer())
 async def entry(mbid):
     ## --------------------- ##
     # Entry point for the API.
